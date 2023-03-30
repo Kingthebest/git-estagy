@@ -1,0 +1,73 @@
+num = int(input("Digite um número inteiro: "))
+
+fibonacci = [0, 1]
+
+while fibonacci[-1] < num:
+    proximo_valor = fibonacci[-1] + fibonacci[-2]
+    fibonacci.append(proximo_valor)
+
+if num in fibonacci:
+    print(f"O número {num} pertence à sequência de Fibonacci.")
+else:
+    print(f"O número {num} não pertence à sequência de Fibonacci.")
+
+
+import json
+
+# Dados de faturamento em JSON
+faturamento_json = """
+{
+    "01": 1241.47,
+    "02": 0,
+    "03": 837.39,
+    "04": 2231.28,
+    "05": 409.67,
+    "06": 2441.88,
+    "07": 0,
+    "08": 2597.19,
+    "09": 932.83,
+    "10": 2286.19,
+    "11": 1391.54,
+    "12": 1568.68,
+    "13": 651.04,
+    "14": 1609.68,
+    "15": 2152.53,
+    "16": 291.67,
+    "17": 2036.83,
+    "18": 2053.63,
+    "19": 1136.47,
+    "20": 2583.39,
+    "21": 1862.15,
+    "22": 2666.43,
+    "23": 1544.22,
+    "24": 0,
+    "25": 891.47,
+    "26": 2058.27,
+    "27": 685.07,
+    "28": 1419.18,
+    "29": 1388.44,
+    "30": 2187.12,
+    "31": 2989.03
+}
+"""
+
+faturamento_dict = json.loads(faturamento_json)
+
+faturamento_diario = list(faturamento_dict.values())
+
+# Menor valor de faturamento diário
+min_faturamento = min([faturamento for faturamento in faturamento_diario if faturamento != 0])
+print(f"O menor valor de faturamento ocorrido em um dia do mês foi: R${min_faturamento:.2f}")
+
+# Maior valor de faturamento diário
+max_faturamento = max(faturamento_diario)
+print(f"O maior valor de faturamento ocorrido em um dia do mês foi: R${max_faturamento:.2f}")
+
+# Número de dias com faturamento superior à média mensal
+faturamento_medio = sum(faturamento_diario) / len(faturamento_diario)
+dias_acima_da_media = len([faturamento for faturamento in faturamento_diario if faturamento > faturamento_medio])
+print(f"O número de dias no mês em que o valor de faturamento diário foi superior à média mensal foi: {dias_acima_da_media}")
+
+
+faturamento = {
+    "SP": 67836.
